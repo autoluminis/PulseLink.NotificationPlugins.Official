@@ -1,0 +1,15 @@
+{
+  "manifestVersion": 2,
+  "apiVersion": 2,
+  "pluginId": "pulselink.dtu",
+  "name": "DTU 通知",
+  "description": "通过 DTU 网关发送 PulseLink 报警和通知。",
+  "version": "1.0.1",
+  "minimumHostVersion": "26.09.14.002",
+  "projectUrl": "https://github.com/autoluminis/PulseLink",
+  "helpUrl": "https://github.com/autoluminis/PulseLink/blob/master/samples/PulseLink.NotificationPlugins.Dtu/README.md",
+  "entryAssembly": "PulseLink.NotificationPlugins.Dtu.dll",
+  "entryType": "PulseLink.NotificationPlugins.Dtu.DtuPlugin",
+  "sha256": "REPLACE_WITH_RELEASE_ASSEMBLY_SHA256",
+  "uiEntry": "console.html"
+}

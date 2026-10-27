@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "providerId": "autoluminis",
+  "providerName": "Autoluminis",
+  "developers": [{ "id": "autoluminis", "displayName": "Autoluminis", "url": "https://github.com/autoluminis" }],
+  "summary": "通过 DTU 网关发送 PulseLink 报警和通知。",
+  "maintainers": [
+    {
+      "id": "autoluminis",
+      "displayName": "Autoluminis",
+      "url": "https://github.com/autoluminis"
+    }
+  ],
+  "license": "MIT",
+  "sourceUrl": "https://github.com/autoluminis/PulseLink",
+  "documentationUrl": "https://github.com/autoluminis/PulseLink/blob/master/samples/PulseLink.NotificationPlugins.Dtu/README.md",
+  "supportUrl": "https://github.com/autoluminis/PulseLink/issues",
+  "issueTrackerUrl": "https://github.com/autoluminis/PulseLink/issues",
+  "privacyPolicyUrl": null,
+  "iconPath": null,
+  "screenshots": [],
+  "tags": ["notification", "dtu"]
+}

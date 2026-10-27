@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sdkPackageId": "PulseLink.Plugin.Abstractions",
+  "sdkPackageVersion": "26.10.27.4",
+  "sdkReleaseVersion": "26.10.27.004",
+  "apiVersion": 2,
+  "plugins": [
+    { "pluginId": "pulselink.wxpusher", "project": "PulseLink.NotificationPlugins.WxPusher/PulseLink.NotificationPlugins.WxPusher.csproj" },
+    { "pluginId": "pulselink.dtu", "project": "PulseLink.NotificationPlugins.Dtu/PulseLink.NotificationPlugins.Dtu.csproj" }
+  ]
+}

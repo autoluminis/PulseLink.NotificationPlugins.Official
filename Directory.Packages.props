@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="PulseLink.Plugin.Abstractions" Version="26.10.27.4" />
+  </ItemGroup>
+</Project>
