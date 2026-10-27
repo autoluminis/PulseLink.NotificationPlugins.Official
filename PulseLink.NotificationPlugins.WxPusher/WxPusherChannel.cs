@@ -26,18 +26,18 @@ public sealed class WxPusherChannel : INotificationChannel
         new("WxPusherUid", "WxPusher UID", "WxPusher UID", "UID_xxxxxxxxxxxxxxxxx", "用于接收通知的 WxPusher 用户标识。")
     ];
 
-    /// <summary>为新渠道提供 AppToken、消息类型和主题等默认配置模板。</summary>
+    /// <summary>为新渠道提供 AppToken、消息类型、主题及付费订阅筛选等默认配置模板。</summary>
     public string DefaultConfigurationJson => """
         {
           "appToken": "AT_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
           "contentType": 1,
           "topicId": null,
-          "verifyPay": false,
+          "verifyPayType": 0,
           "url": "https://wxpusher.zjiecode.com/api/send/message"
         }
         """;
 
-    /// <summary>校验 WxPusher 配置的 JSON 格式、令牌、主题和服务地址。</summary>
+    /// <summary>校验 WxPusher 配置的 JSON 格式、令牌、消息类型、主题、订阅筛选和服务地址。</summary>
     public ValueTask<NotificationChannelValidationResult> ValidateConfigurationAsync(string configurationJson, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -85,7 +85,7 @@ public sealed class WxPusherChannel : INotificationChannel
             validConfiguration.ContentType,
             uids.Length == 0 ? null : uids,
             validConfiguration.TopicId is null ? null : [validConfiguration.TopicId.Value],
-            validConfiguration.VerifyPay);
+            validConfiguration.VerifyPayType ?? (validConfiguration.VerifyPay ? 1 : 0));
 
         using var request = new HttpRequestMessage(HttpMethod.Post, validConfiguration.Url.Trim())
         {
@@ -109,8 +109,9 @@ public sealed class WxPusherChannel : INotificationChannel
         var errors = new List<string>();
         if (configuration is null) return ["Configuration cannot be empty."];
         if (string.IsNullOrWhiteSpace(configuration.AppToken)) errors.Add("appToken is required.");
-        if (configuration.ContentType is not 1 and not 2) errors.Add("contentType must be 1 (text) or 2 (HTML).");
+        if (configuration.ContentType is not 1 and not 2 and not 3) errors.Add("contentType must be 1 (text), 2 (HTML), or 3 (Markdown).");
         if (configuration.TopicId is <= 0) errors.Add("topicId must be a positive integer when supplied.");
+        if (configuration.VerifyPayType is < 0 or > 2) errors.Add("verifyPayType must be 0 (all users), 1 (paid subscribers), or 2 (unsubscribed or expired users).");
         if (!Uri.TryCreate(configuration.Url, UriKind.Absolute, out var uri) || uri.Scheme is not ("http" or "https")) errors.Add("url must be an absolute HTTP(S) URL.");
         return errors;
     }
@@ -145,21 +146,31 @@ public sealed class WxPusherChannel : INotificationChannel
             return GetMessageId(data[0]);
         }
 
-        if (!root.TryGetProperty("messageId", out var messageId)) return null;
-        return messageId.ValueKind switch
+        // WxPusher now exposes messageContentId for the accepted message; messageId is deprecated.
+        if (root.TryGetProperty("messageContentId", out var messageContentId))
         {
-            JsonValueKind.String => messageId.GetString(),
-            JsonValueKind.Number => messageId.GetRawText(),
+            return GetScalarId(messageContentId);
+        }
+
+        if (root.TryGetProperty("messageId", out var legacyMessageId)) return GetScalarId(legacyMessageId);
+        return null;
+    }
+
+    private static string? GetScalarId(JsonElement value) => value.ValueKind switch
+        {
+            JsonValueKind.String => value.GetString(),
+            JsonValueKind.Number => value.GetRawText(),
             _ => null
         };
-    }
 
     private sealed class WxPusherConfiguration
     {
         public string AppToken { get; init; } = string.Empty;
         public int ContentType { get; init; } = 1;
         public int? TopicId { get; init; }
+        // Legacy setting retained for existing channel configurations; the request uses verifyPayType.
         public bool VerifyPay { get; init; }
+        public int? VerifyPayType { get; init; }
         public string Url { get; init; } = DefaultEndpoint;
     }
 
@@ -170,5 +181,5 @@ public sealed class WxPusherChannel : INotificationChannel
         int ContentType,
         IReadOnlyList<string>? Uids,
         IReadOnlyList<int>? TopicIds,
-        bool VerifyPay);
+        int VerifyPayType);
 }

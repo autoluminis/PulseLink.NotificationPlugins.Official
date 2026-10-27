@@ -12,12 +12,12 @@
     }
   ],
   "license": "MIT",
-  "sourceUrl": "https://github.com/autoluminis/PulseLink",
-  "documentationUrl": "https://github.com/autoluminis/PulseLink/blob/master/samples/PulseLink.NotificationPlugins.WxPusher/README.md",
-  "supportUrl": "https://github.com/autoluminis/PulseLink/issues",
-  "issueTrackerUrl": "https://github.com/autoluminis/PulseLink/issues",
+  "sourceUrl": "https://github.com/autoluminis/PulseLink.NotificationPlugins.Official",
+  "documentationUrl": "https://github.com/autoluminis/PulseLink.NotificationPlugins.Official/blob/master/PulseLink.NotificationPlugins.WxPusher/README.md",
+  "supportUrl": "https://github.com/autoluminis/PulseLink.NotificationPlugins.Official/issues",
+  "issueTrackerUrl": "https://github.com/autoluminis/PulseLink.NotificationPlugins.Official/issues",
   "privacyPolicyUrl": null,
-  "iconPath": null,
+  "iconPath": "WxPusher.png",
   "screenshots": [],
   "tags": ["notification", "wechat", "wxpusher"]
 }

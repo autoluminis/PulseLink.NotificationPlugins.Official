@@ -9,7 +9,6 @@ $projectPath = Join-Path $PSScriptRoot 'PulseLink.NotificationPlugins.WxPusher.c
 $buildOutput = Join-Path $PSScriptRoot "bin/$Configuration/net10.0"
 $assemblyName = 'PulseLink.NotificationPlugins.WxPusher.dll'
 $pluginId = 'pulselink.wxpusher'
-$archivePath = Join-Path $OutputDirectory "$pluginId.zip"
 $stagingDirectory = Join-Path ([System.IO.Path]::GetTempPath()) "PulseLink-plugin-$([Guid]::NewGuid().ToString('N'))"
 
 try {
@@ -29,6 +28,7 @@ try {
     $manifest | ConvertTo-Json | Set-Content $manifestPath -Encoding utf8
 
     New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
+    $archivePath = Join-Path $OutputDirectory "$pluginId-$($manifest.version).zip"
     if (Test-Path $archivePath) { Remove-Item -LiteralPath $archivePath -Force }
     Compress-Archive -Path (Join-Path $stagingDirectory '*') -DestinationPath $archivePath -CompressionLevel Optimal
     Write-Output "Plugin package created: $archivePath"

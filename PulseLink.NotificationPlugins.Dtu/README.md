@@ -18,4 +18,10 @@ DTU SMS / 语音网关插件。DTU 主动连接 TCP 监听端口后，插件以 
 
 控制台可查看在线设备、设备上报日志、投递队列和历史任务；可取消尚未下发的任务，并清理已结束的任务记录。
 
-打包：`./Pack-Plugin.ps1`。在 `PulseLink:Notifications:Plugins:AllowedPluginIds` 中加入 `pulselink.dtu`，随后在“通知中心 → 插件”上传 ZIP、创建并启用 `sms` / `voice` 渠道实例，再通过“插件控制台”配置网关。
+## 安装与首次配置
+
+在官方插件仓库根目录运行 `./Pack-Plugins.ps1`，统一构建并打包 WxPusher 与 DTU。版本化 ZIP 输出到 `artifacts/`，DTU 当前版本示例为 `pulselink.dtu-1.0.1.zip`。发布前在 PulseLink 宿主配置 `PulseLink:Notifications:Plugins:AllowedPluginIds`（环境变量 `PULSELINK_NOTIFICATION_PLUGIN_ALLOWLIST`）中允许 `pulselink.dtu`，再到“通知中心 → 插件”上传 ZIP。白名单是宿主配置，不属于插件渠道 JSON。
+
+安装后创建并启用 `sms` 和 `voice` 两个渠道实例，将它们关联到通知策略、收件人和模板；两个实例的配置 JSON 保持 `{}`。然后打开“插件控制台”配置 TCP 监听参数并保存。首次在控制台保存前不会启动 TCP 监听；旧部署仍可在首次保存前从已启用渠道的旧配置读取兼容设置。保存后，控制台配置成为唯一设置来源。
+
+升级插件后，确认渠道实例仍启用，并在插件控制台检查监听地址、端口、DTU 在线状态和设备上报日志。控制台也可查看投递队列与历史任务、取消尚未下发的任务、清理已结束任务记录。

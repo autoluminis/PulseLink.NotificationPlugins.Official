@@ -4,10 +4,10 @@
   "pluginId": "pulselink.wxpusher",
   "name": "WxPusher 通知",
   "description": "通过 WxPusher 向已配置的接收者发送 PulseLink 报警和通知。",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minimumHostVersion": "26.09.14.002",
-  "projectUrl": "https://github.com/autoluminis/PulseLink",
-  "helpUrl": "https://github.com/autoluminis/PulseLink/blob/master/samples/PulseLink.NotificationPlugins.WxPusher/README.md",
+  "projectUrl": "https://github.com/autoluminis/PulseLink.NotificationPlugins.Official",
+  "helpUrl": "https://github.com/autoluminis/PulseLink.NotificationPlugins.Official/blob/master/PulseLink.NotificationPlugins.WxPusher/README.md",
   "entryAssembly": "PulseLink.NotificationPlugins.WxPusher.dll",
   "entryType": "PulseLink.NotificationPlugins.WxPusher.WxPusherPlugin",
   "sha256": ""
