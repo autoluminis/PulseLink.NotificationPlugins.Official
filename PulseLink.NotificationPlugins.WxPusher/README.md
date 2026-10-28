@@ -1,5 +1,9 @@
 # PulseLink WxPusher 通知插件
 
+## 许可证
+
+本插件适用[仓库许可证](../LICENSE)：非商业使用免费。已购买并持有有效 PulseLink 许可授权的用户，通过 PulseLink 官方在线插件商城安装后，可在该许可授权范围内商业使用，无需另付插件授权费，合法安装后的离线使用同样适用。其他商业使用须事先取得付费书面授权。企业内部生产使用、客户交付和收费服务均属于商业使用。权益范围及授权咨询见[仓库说明](../README.md#许可证与商业授权)。
+
 本插件通过 WxPusher 标准推送 API 发送 PulseLink 报警和通知。接口字段和线上行为以 [WxPusher 官方开发文档](https://wxpusher.zjiecode.com/docs/) 及[发送消息 API](https://wxpusher.zjiecode.com/docs/api-reference.html) 为准。
 
 插件市场图标为 `WxPusher.png`，并随插件包一起发布。

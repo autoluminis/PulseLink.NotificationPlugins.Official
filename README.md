@@ -7,6 +7,16 @@
 - `PulseLink.NotificationPlugins.WxPusher`：WxPusher 官方通知插件。
 - `PulseLink.NotificationPlugins.Dtu`：DTU 短信/语音网关官方通知插件。
 
+## 许可证与商业授权
+
+本仓库采用 [PulseLink 官方通知插件非商业使用及商业授权协议](LICENSE)，标识为 `LicenseRef-PulseLink-Noncommercial-Commercial`。这是源码可见的受限许可。
+
+个人非商业使用、非商业学习、教学及学术研究可按协议免费使用；**除下述 PulseLink 已购许可权益外，商业使用必须事先取得书面商业授权并支付授权费用**。企业内部生产使用、客户交付、产品集成、收费服务和 SaaS 均属于商业使用，即使未对插件单独收费也需要授权。经营主体可免费进行内部隔离评估，但不得用于生产或实际业务。
+
+**已购买并持有有效 PulseLink 许可授权的用户，通过 PulseLink 官方在线插件商城安装本插件后，可在该 PulseLink 许可授权范围内商业使用，无需另行购买插件授权或支付插件授权费。** 合法安装后的离线使用同样适用。该权益不扩大原许可的主体、期限、实例及部署范围，不包含插件的独立销售、转授权或向未获 PulseLink 许可的第三方分发；自行构建、仓库下载及其他渠道副本不自动享有此权益。
+
+授权价格、期限、部署数量及支持范围由商业授权合同约定。请通过 [Autoluminis 主页](https://github.com/autoluminis) 公布的联系方式咨询。第三方 SDK 和依赖遵循各自许可证；本协议不追溯变更此前版本已授予的许可。构建和打包输出均附带 `LICENSE`。
+
 ## 构建
 
 ```powershell
