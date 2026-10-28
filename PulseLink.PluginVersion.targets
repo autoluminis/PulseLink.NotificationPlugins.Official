@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <!-- 普通构建使用插件清单版本；打包时可通过 PulseLinkPluginVersion 覆盖。 -->
+    <_PulseLinkPluginManifestPath Condition="Exists('$(MSBuildProjectDirectory)/plugin.json')">$(MSBuildProjectDirectory)/plugin.json</_PulseLinkPluginManifestPath>
+    <_PulseLinkPluginManifestText Condition="'$(_PulseLinkPluginManifestPath)' != ''">$([System.IO.File]::ReadAllText('$(_PulseLinkPluginManifestPath)'))</_PulseLinkPluginManifestText>
+    <PulseLinkPluginVersion Condition="'$(PulseLinkPluginVersion)' == ''">$([System.Text.RegularExpressions.Regex]::Match('$(_PulseLinkPluginManifestText)', '&quot;version&quot;\s*:\s*&quot;([^&quot;]+)&quot;').Groups[1].Value)</PulseLinkPluginVersion>
+    <_PulseLinkPluginId>$([System.Text.RegularExpressions.Regex]::Match('$(_PulseLinkPluginManifestText)', '&quot;pluginId&quot;\s*:\s*&quot;([^&quot;]+)&quot;').Groups[1].Value)</_PulseLinkPluginId>
+    <Version>$(PulseLinkPluginVersion)</Version>
+    <AssemblyVersion>$(PulseLinkPluginVersion).0</AssemblyVersion>
+    <FileVersion>$(PulseLinkPluginVersion).0</FileVersion>
+    <InformationalVersion>$(PulseLinkPluginVersion)</InformationalVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>PulseLinkPluginVersion</_Parameter1>
+      <_Parameter2>$(PulseLinkPluginVersion)</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>PulseLinkPluginId</_Parameter1>
+      <_Parameter2>$(_PulseLinkPluginId)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <Target Name="ValidatePulseLinkPluginBuildVersion" BeforeTargets="GenerateAssemblyInfo">
+    <Error Condition="'$(_PulseLinkPluginManifestPath)' == '' or '$(_PulseLinkPluginId)' == ''" Text="插件项目必须提供有效的 plugin.json 标识。" />
+    <Error Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('$(PulseLinkPluginVersion)', '^[0-9]+\.[0-9]+\.[0-9]+$'))" Text="插件构建版本必须为三段数字 MAJOR.MINOR.PATCH。" />
+  </Target>
+</Project>
